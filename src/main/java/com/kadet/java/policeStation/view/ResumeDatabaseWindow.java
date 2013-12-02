@@ -1,11 +1,9 @@
 package com.kadet.java.policeStation.view;
 
-import com.kadet.java.policeStation.database.ResumeDatabase;
-import com.kadet.java.policeStation.entity.Resume;
+import com.kadet.java.swing.pagination.PaginationPanel;
+import com.kadet.java.swing.pagination.ResumeDatabaseClickPage;
 
 import java.awt.*;
-import java.util.*;
-import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -16,10 +14,8 @@ import java.util.List;
  */
 public class ResumeDatabaseWindow extends AbstractWindow {
 
-
-    private List<ResumePanel> resumePanels;
-
-    private ResumeDatabase resumeDatabase = ResumeDatabase.getInstance();
+    private PaginationPanel paginationPanel;
+    private final int itemsPerPage = 4;
 
     public ResumeDatabaseWindow(Window parent) {
         super(parent);
@@ -27,31 +23,24 @@ public class ResumeDatabaseWindow extends AbstractWindow {
 
     @Override
     protected void initializeComponents() {
-        this.resumePanels = new ArrayList<ResumePanel>();
+        this.paginationPanel = new PaginationPanel(this, itemsPerPage);
     }
 
     private void removeComponents () {
-        for (ResumePanel panel : resumePanels) {
-            remove(panel);
-        }
-        resumePanels.clear();
+        remove(paginationPanel);
     }
 
     @Override
     protected void addComponents() {
-        for (ResumePanel panel : resumePanels) {
-            add(panel);
-        }
+        add(paginationPanel);
     }
 
     public void updateComponents () {
         removeComponents();
-        List<Resume> resumes = resumeDatabase.getResumes();
-        for (Resume resume : resumes) {
-            ResumePanel resumePanel
-                    = new ResumePanel(this, resume);
-            resumePanels.add(resumePanel);
-        }
+        paginationPanel.setClickPageStrategy(
+                new ResumeDatabaseClickPage(paginationPanel)
+        );
+        paginationPanel.clickPage(PaginationPanel.START_PAGE, itemsPerPage);
         addComponents();
     }
 

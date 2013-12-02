@@ -1,12 +1,10 @@
 package com.kadet.java.policeStation.view.criminalCase;
 
-import com.kadet.java.policeStation.database.CriminalCaseDatabase;
-import com.kadet.java.policeStation.entity.CriminalCase;
 import com.kadet.java.policeStation.view.AbstractWindow;
+import com.kadet.java.swing.pagination.CriminalCaseDatabaseClickPage;
+import com.kadet.java.swing.pagination.PaginationPanel;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -17,44 +15,33 @@ import java.util.List;
  */
 public class CriminalCasesDatabaseWindow extends AbstractWindow {
 
-    private List<CriminalCasePanel> criminalCasePanels;
-
-    private CriminalCaseDatabase criminalDatabase = CriminalCaseDatabase.getInstance();
+    private final int itemsPerPage = 4;
+    private PaginationPanel paginationPanel;
 
     public CriminalCasesDatabaseWindow(Window window) {
         super(window);
     }
 
     protected void initializeComponents () {
-        criminalCasePanels = new ArrayList<CriminalCasePanel>();
+        this.paginationPanel = new PaginationPanel(this, itemsPerPage);
     }
 
     protected void addComponents () {
-        for (CriminalCasePanel panel : criminalCasePanels) {
-            add(panel);
-        }
+        add(paginationPanel);
     }
 
     private void removeComponents () {
-        for (CriminalCasePanel criminalPanel : criminalCasePanels) {
-            remove(criminalPanel);
-        }
-        removeCriminalCasePanels();
-    }
-
-    private void removeCriminalCasePanels () {
-        while (criminalCasePanels.size() != 0) {
-            criminalCasePanels.remove(criminalCasePanels.get(0));
-        }
+        remove(paginationPanel);
     }
 
     public void updateComponents () {
         removeComponents();
-        List<CriminalCase> criminals = criminalDatabase.getCriminalCases();
-        for (CriminalCase criminalCase : criminals) {
-            CriminalCasePanel criminalPanel = new CriminalCasePanel(this, criminalCase);
-            criminalCasePanels.add(criminalPanel);
-        }
+
+        paginationPanel.setClickPageStrategy(
+                new CriminalCaseDatabaseClickPage(paginationPanel)
+        );
+        paginationPanel.clickPage(PaginationPanel.START_PAGE, itemsPerPage);
+
         addComponents();
     }
 

@@ -48,4 +48,39 @@ public class CriminalCaseDatabase {
     public List<CriminalCase> getCriminalCases() {
         return criminalCases;
     }
+
+    public int getCriminalCasesNumber() {
+        return criminalCases.size();
+    }
+
+    public List<CriminalCase> subList (int firstIndex, int lastIndex) {
+        if (firstIndex < 0 || lastIndex < 1 || firstIndex >= lastIndex || firstIndex > criminalCases.size()) {
+            throw new RuntimeException("Bad parameters error!");
+        }
+        List<CriminalCase> subCriminalCases
+                = new ArrayList<CriminalCase>();
+        for (int resumeIndex = firstIndex; resumeIndex < lastIndex && resumeIndex < criminalCases.size(); ++resumeIndex) {
+            subCriminalCases.add(
+                    criminalCases.get(resumeIndex)
+            );
+        }
+        return subCriminalCases;
+    }
+
+    public List<CriminalCase> subListFromLast (int firstIndex, int lastIndex, int last) {
+        List<CriminalCase> lastCriminalCases
+                = getLastCriminalCases(last);
+        if (firstIndex < 0 || lastIndex < 1 || firstIndex >= lastIndex || firstIndex > lastCriminalCases.size()) {
+            throw new RuntimeException("Bad parameters error!");
+        }
+        List<CriminalCase> subCriminalCases
+                = new ArrayList<CriminalCase>();
+        for (int resumeIndex = firstIndex; resumeIndex < lastIndex && resumeIndex < lastCriminalCases.size(); ++resumeIndex) {
+            subCriminalCases.add(
+                    lastCriminalCases.get(resumeIndex)
+            );
+        }
+        return subCriminalCases;
+    }
+
 }

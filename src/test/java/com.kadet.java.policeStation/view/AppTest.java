@@ -41,7 +41,135 @@ public class AppTest {
         resumeDatabase = ResumeDatabase.getInstance();
         resumeDatabase.addResume(
                 new Resume(
-                        "Alexey Soroka",
+                        "1Alexey Soroka",
+                        "lehaSVV2009test@gmail.com",
+                        new Date(),
+                        true
+                )
+        );
+        resumeDatabase.addResume(
+                new Resume(
+                        "2Alexey Soroka",
+                        "lehaSVV2009test@gmail.com",
+                        new Date(),
+                        true
+                )
+        );
+        resumeDatabase.addResume(
+                new Resume(
+                        "3Alexey Soroka",
+                        "lehaSVV2009test@gmail.com",
+                        new Date(),
+                        true
+                )
+        );
+        resumeDatabase.addResume(
+                new Resume(
+                        "4Alexey Soroka",
+                        "lehaSVV2009test@gmail.com",
+                        new Date(),
+                        true
+                )
+        );
+        resumeDatabase.addResume(
+                new Resume(
+                        "5Alexey Soroka",
+                        "lehaSVV2009test@gmail.com",
+                        new Date(),
+                        true
+                )
+        );
+        resumeDatabase.addResume(
+                new Resume(
+                        "6Alexey Soroka",
+                        "lehaSVV2009test@gmail.com",
+                        new Date(),
+                        true
+                )
+        );
+        resumeDatabase.addResume(
+                new Resume(
+                        "7Alexey Soroka",
+                        "lehaSVV2009test@gmail.com",
+                        new Date(),
+                        true
+                )
+        );
+        resumeDatabase.addResume(
+                new Resume(
+                        "8Alexey Soroka",
+                        "lehaSVV2009test@gmail.com",
+                        new Date(),
+                        true
+                )
+        );
+        resumeDatabase.addResume(
+                new Resume(
+                        "9Alexey Soroka",
+                        "lehaSVV2009test@gmail.com",
+                        new Date(),
+                        true
+                )
+        );
+        resumeDatabase.addResume(
+                new Resume(
+                        "10Alexey Soroka",
+                        "lehaSVV2009test@gmail.com",
+                        new Date(),
+                        true
+                )
+        );
+        resumeDatabase.addResume(
+                new Resume(
+                        "11Alexey Soroka",
+                        "lehaSVV2009test@gmail.com",
+                        new Date(),
+                        true
+                )
+        );
+        resumeDatabase.addResume(
+                new Resume(
+                        "12Alexey Soroka",
+                        "lehaSVV2009test@gmail.com",
+                        new Date(),
+                        true
+                )
+        );
+        resumeDatabase.addResume(
+                new Resume(
+                        "13Alexey Soroka",
+                        "lehaSVV2009test@gmail.com",
+                        new Date(),
+                        true
+                )
+        );
+        resumeDatabase.addResume(
+                new Resume(
+                        "14Alexey Soroka",
+                        "lehaSVV2009test@gmail.com",
+                        new Date(),
+                        true
+                )
+        );
+        resumeDatabase.addResume(
+                new Resume(
+                        "15Alexey Soroka",
+                        "lehaSVV2009test@gmail.com",
+                        new Date(),
+                        true
+                )
+        );
+        resumeDatabase.addResume(
+                new Resume(
+                        "16Alexey Soroka",
+                        "lehaSVV2009test@gmail.com",
+                        new Date(),
+                        true
+                )
+        );
+        resumeDatabase.addResume(
+                new Resume(
+                        "17Alexey Soroka",
                         "lehaSVV2009test@gmail.com",
                         new Date(),
                         true
@@ -56,6 +184,160 @@ public class AppTest {
         );
         criminalDatabase.addCriminal(criminal);
         criminalCaseDatabase = CriminalCaseDatabase.getInstance();
+        criminalCaseDatabase.addCriminalCase(
+                new CriminalCase(
+                        criminal,
+                        "description",
+                        new Date()
+                )
+        );
+        criminalCaseDatabase.addCriminalCase(
+                new CriminalCase(
+                        criminal,
+                        "description",
+                        new Date()
+                )
+        );
+        criminalCaseDatabase.addCriminalCase(
+                new CriminalCase(
+                        criminal,
+                        "description",
+                        new Date()
+                )
+        );
+        criminalCaseDatabase.addCriminalCase(
+                new CriminalCase(
+                        criminal,
+                        "description",
+                        new Date()
+                )
+        );
+        criminalCaseDatabase.addCriminalCase(
+                new CriminalCase(
+                        criminal,
+                        "description",
+                        new Date()
+                )
+        );
+        criminalCaseDatabase.addCriminalCase(
+                new CriminalCase(
+                        criminal,
+                        "description",
+                        new Date()
+                )
+        );
+        criminalCaseDatabase.addCriminalCase(
+                new CriminalCase(
+                        criminal,
+                        "description",
+                        new Date()
+                )
+        );
+        criminalCaseDatabase.addCriminalCase(
+                new CriminalCase(
+                        criminal,
+                        "description",
+                        new Date()
+                )
+        );
+        criminalCaseDatabase.addCriminalCase(
+                new CriminalCase(
+                        criminal,
+                        "description",
+                        new Date()
+                )
+        );
+        criminalCaseDatabase.addCriminalCase(
+                new CriminalCase(
+                        criminal,
+                        "description",
+                        new Date()
+                )
+        );
+        criminalCaseDatabase.addCriminalCase(
+                new CriminalCase(
+                        criminal,
+                        "description",
+                        new Date()
+                )
+        );
+        criminalCaseDatabase.addCriminalCase(
+                new CriminalCase(
+                        criminal,
+                        "description",
+                        new Date()
+                )
+        );
+        criminalCaseDatabase.addCriminalCase(
+                new CriminalCase(
+                        criminal,
+                        "description",
+                        new Date()
+                )
+        );
+        criminalCaseDatabase.addCriminalCase(
+                new CriminalCase(
+                        criminal,
+                        "description",
+                        new Date()
+                )
+        );
+        criminalCaseDatabase.addCriminalCase(
+                new CriminalCase(
+                        criminal,
+                        "description",
+                        new Date()
+                )
+        );
+        criminalCaseDatabase.addCriminalCase(
+                new CriminalCase(
+                        criminal,
+                        "description",
+                        new Date()
+                )
+        );
+        criminalCaseDatabase.addCriminalCase(
+                new CriminalCase(
+                        criminal,
+                        "description",
+                        new Date()
+                )
+        );
+        criminalCaseDatabase.addCriminalCase(
+                new CriminalCase(
+                        criminal,
+                        "description",
+                        new Date()
+                )
+        );
+        criminalCaseDatabase.addCriminalCase(
+                new CriminalCase(
+                        criminal,
+                        "description",
+                        new Date()
+                )
+        );
+        criminalCaseDatabase.addCriminalCase(
+                new CriminalCase(
+                        criminal,
+                        "description",
+                        new Date()
+                )
+        );
+        criminalCaseDatabase.addCriminalCase(
+                new CriminalCase(
+                        criminal,
+                        "description",
+                        new Date()
+                )
+        );
+        criminalCaseDatabase.addCriminalCase(
+                new CriminalCase(
+                        criminal,
+                        "description",
+                        new Date()
+                )
+        );
         criminalCaseDatabase.addCriminalCase(
                 new CriminalCase(
                         criminal,

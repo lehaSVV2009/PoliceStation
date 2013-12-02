@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author Кадет
  */
-public class FirePolicemenClickPage implements ClickPageStrategy {
+public class PolicemenDatabaseClickPage implements ClickPageStrategy {
 
     private Sheriff sheriff;
 
@@ -22,7 +22,7 @@ public class FirePolicemenClickPage implements ClickPageStrategy {
 
     private PolicemanDatabase policemanDatabase = PolicemanDatabase.getInstance();
 
-    public FirePolicemenClickPage(Sheriff sheriff, PaginationPanel paginationPanel) {
+    public PolicemenDatabaseClickPage(Sheriff sheriff, PaginationPanel paginationPanel) {
         this.sheriff = sheriff;
         this.paginationPanel = paginationPanel;
     }
@@ -41,7 +41,6 @@ public class FirePolicemenClickPage implements ClickPageStrategy {
                         paginationPanel.getOwner()
                 )
         );
-        System.out.println("clicked : " + currentPage);
     }
 
 }

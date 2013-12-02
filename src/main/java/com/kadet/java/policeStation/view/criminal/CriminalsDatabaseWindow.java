@@ -3,6 +3,8 @@ package com.kadet.java.policeStation.view.criminal;
 import com.kadet.java.policeStation.database.CriminalDatabase;
 import com.kadet.java.policeStation.entity.Criminal;
 import com.kadet.java.policeStation.view.AbstractWindow;
+import com.kadet.java.swing.pagination.CriminalDatabaseClickPage;
+import com.kadet.java.swing.pagination.PaginationPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,44 +20,34 @@ import java.util.List;
  */
 public class CriminalsDatabaseWindow extends AbstractWindow {
 
-    private List<CriminalPanel> criminalPanels;
+    private final int itemsPerPage = 4;
+    private PaginationPanel paginationPanel;
 
-    private CriminalDatabase criminalDatabase = CriminalDatabase.getInstance();
 
     public CriminalsDatabaseWindow(JDialog window) {
         super(window);
     }
 
     protected void initializeComponents () {
-        criminalPanels = new ArrayList<CriminalPanel>();
+        this.paginationPanel = new PaginationPanel(this, itemsPerPage);
     }
 
     protected void addComponents () {
-        for (CriminalPanel panel : criminalPanels) {
-            add(panel);
-        }
+        add(paginationPanel);
     }
 
     private void removeComponents () {
-        for (CriminalPanel criminalPanel : criminalPanels) {
-            remove(criminalPanel);
-        }
-        removeCriminalPanels();
-    }
-
-    private void removeCriminalPanels () {
-        while (criminalPanels.size() != 0) {
-            criminalPanels.remove(criminalPanels.get(0));
-        }
+        remove(paginationPanel);
     }
 
     public void updateComponents () {
         removeComponents();
-        List<Criminal> criminals = criminalDatabase.getCriminals();
-        for (Criminal criminal : criminals) {
-            CriminalPanel criminalPanel = new CriminalPanel(this, criminal);
-            criminalPanels.add(criminalPanel);
-        }
+
+        paginationPanel.setClickPageStrategy(
+                new CriminalDatabaseClickPage(paginationPanel)
+        );
+        paginationPanel.clickPage(PaginationPanel.START_PAGE, itemsPerPage);
+
         addComponents();
     }
 

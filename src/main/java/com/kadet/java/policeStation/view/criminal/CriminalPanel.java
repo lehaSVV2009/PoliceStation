@@ -17,7 +17,7 @@ import java.awt.event.ActionListener;
  */
 public class CriminalPanel extends JPanel implements ActionListener{
 
-    private JDialog parent;
+    private Window owner;
 
     private JLabel shortCriminalInfo;
     private JButton moreInfoButton;
@@ -25,8 +25,8 @@ public class CriminalPanel extends JPanel implements ActionListener{
     private Criminal criminal;
     private CriminalWindow criminalWindow;
 
-    public CriminalPanel(JDialog parent, Criminal criminal) {
-        this.parent = parent;
+    public CriminalPanel(Window owner, Criminal criminal) {
+        this.owner = owner;
         this.criminal = criminal;
         initialize();
         initializeComponents();
@@ -44,7 +44,7 @@ public class CriminalPanel extends JPanel implements ActionListener{
         this.moreInfoButton = new JButton(Messages.MORE_BUTTON);
         moreInfoButton.addActionListener(this);
 
-        this.criminalWindow = new CriminalWindow(parent, criminal);
+        this.criminalWindow = new CriminalWindow(owner, criminal);
     }
 
     private void addComponents () {

@@ -33,4 +33,21 @@ public class CriminalDatabase {
     public List<Criminal> getCriminals() {
         return criminals;
     }
-}
+
+    public int getCriminalsNumber () {
+        return criminals.size();
+    }
+
+    public List<Criminal> subList (int firstIndex, int lastIndex) {
+        if (firstIndex < 0 || lastIndex < 1 || firstIndex >= lastIndex || firstIndex > criminals.size()) {
+            throw new RuntimeException("Bad parameters error!");
+        }
+        List<Criminal> subCriminals
+                = new ArrayList<Criminal>();
+        for (int resumeIndex = firstIndex; resumeIndex < lastIndex && resumeIndex < criminals.size(); ++resumeIndex) {
+            subCriminals.add(
+                    criminals.get(resumeIndex)
+            );
+        }
+        return subCriminals;
+    }}

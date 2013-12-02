@@ -1,24 +1,19 @@
 package com.kadet.java.policeStation.view;
 
-import com.kadet.java.policeStation.database.CriminalCaseDatabase;
 import com.kadet.java.policeStation.database.PolicemanDatabase;
-import com.kadet.java.policeStation.entity.CriminalCase;
 import com.kadet.java.policeStation.entity.Policeman;
-import com.kadet.java.policeStation.util.DataStrings;
 import com.kadet.java.policeStation.util.Messages;
-import com.kadet.java.policeStation.view.criminalCase.AddingCriminalCaseWindow;
 import com.kadet.java.policeStation.view.criminal.AddingCriminalWindow;
 import com.kadet.java.policeStation.view.criminal.CriminalsDatabaseWindow;
+import com.kadet.java.policeStation.view.criminalCase.AddingCriminalCaseWindow;
 import com.kadet.java.policeStation.view.criminalCase.CriminalCasesDatabaseWindow;
+import com.kadet.java.swing.pagination.LastCriminalCases;
+import com.kadet.java.swing.pagination.PaginationPanel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.util.*;
-import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -66,11 +61,9 @@ public class PolicemanWindow extends AbstractWindow implements ActionListener{
     private JButton createCriminalCaseButton;
     private JButton addCriminalButton;
 
-    private JPanel criminalCasesPanel;
-    private List<JTextArea> criminalCasesTextAreas;
+    private final int itemsPerPage = 5;
+    private PaginationPanel paginationPanel;
 
-
-    private CriminalCaseDatabase criminalCaseDatabase = CriminalCaseDatabase.getInstance();
     private PolicemanDatabase policemanDatabase = PolicemanDatabase.getInstance();
 
     public PolicemanWindow(Window window) {
@@ -103,9 +96,7 @@ public class PolicemanWindow extends AbstractWindow implements ActionListener{
                 = new JButton(Messages.ADD_CRIMINAL_BUTTON);
         addCriminalButton.addActionListener(this);
 
-        this.criminalCasesPanel = new JPanel();
-        this.criminalCasesTextAreas = new ArrayList<JTextArea>();
-
+        this.paginationPanel = new PaginationPanel(this, itemsPerPage);
 
         this.accountSettingsInfo = new AccountSettingsWindow(this);
 
@@ -125,14 +116,7 @@ public class PolicemanWindow extends AbstractWindow implements ActionListener{
         remove(resignButton);
         remove(createCriminalCaseButton);
         remove(addCriminalButton);
-        remove(criminalCasesPanel);
-        clearCriminalCasesTextAreas();
-    }
-
-    protected void clearCriminalCasesTextAreas () {
-        while (criminalCasesTextAreas.size() != 0) {
-            criminalCasesTextAreas.remove(0);
-        }
+        remove(paginationPanel);
     }
 
     protected void addComponents () {
@@ -144,21 +128,16 @@ public class PolicemanWindow extends AbstractWindow implements ActionListener{
         add(createCriminalCaseButton);
         add(addCriminalButton);
 
-        criminalCasesPanel = new JPanel();
-        for (JTextArea textArea : criminalCasesTextAreas) {
-            criminalCasesPanel.add(textArea);
-        }
-        add(criminalCasesPanel);
+        add(paginationPanel);
     }
 
     public void updateComponents () {
         removeComponents();
-        List<CriminalCase> lastCriminalCases
-                = criminalCaseDatabase.getLastCriminalCases(DataStrings.MAX_CRIMINAL_CASES_VALUE);
-        for (CriminalCase criminalCase : lastCriminalCases) {
-            JTextArea textArea = new JTextArea(criminalCase.toString());
-            criminalCasesTextAreas.add(textArea);
-        }
+        paginationPanel.setClickPageStrategy(
+                new LastCriminalCases(paginationPanel)
+        );
+        paginationPanel.setButtonsPanelVisible(false);
+        paginationPanel.clickPage(PaginationPanel.START_PAGE, itemsPerPage);
         addComponents();
     }
 

@@ -25,7 +25,7 @@ public class PaginationPanel extends JPanel implements ActionListener{
     private JPanel pagePanel;
     private List<Component> components;
 
-    private JPanel pageButtonsPanel;
+    private JPanel buttonsPanel;
     private List<JButton> pageNumberButtons;
 
     private ClickPageStrategy clickPageStrategy;
@@ -49,8 +49,8 @@ public class PaginationPanel extends JPanel implements ActionListener{
 
         components = new ArrayList<Component>();
 
-        pageButtonsPanel = new JPanel();
-        pageButtonsPanel.setLayout(
+        buttonsPanel = new JPanel();
+        buttonsPanel.setLayout(
                 new FlowLayout());
         pageNumberButtons = new ArrayList<JButton>();
     }
@@ -63,9 +63,9 @@ public class PaginationPanel extends JPanel implements ActionListener{
         add(pagePanel, BorderLayout.CENTER);
 
         for (JButton button : pageNumberButtons) {
-            pageButtonsPanel.add(button);
+            buttonsPanel.add(button);
         }
-        add(pageButtonsPanel, BorderLayout.SOUTH);
+        add(buttonsPanel, BorderLayout.SOUTH);
 
     }
 
@@ -77,10 +77,10 @@ public class PaginationPanel extends JPanel implements ActionListener{
         remove(pagePanel);
 
         for (JButton button : pageNumberButtons) {
-            pageButtonsPanel.remove(button);
+            buttonsPanel.remove(button);
         }
         pageNumberButtons.clear();
-        remove(pageButtonsPanel);
+        remove(buttonsPanel);
     }
 
     /**
@@ -167,5 +167,9 @@ public class PaginationPanel extends JPanel implements ActionListener{
 
     public Window getOwner() {
         return owner;
+    }
+
+    public void setButtonsPanelVisible (boolean status) {
+        buttonsPanel.setVisible(status);
     }
 }
