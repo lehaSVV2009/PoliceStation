@@ -24,7 +24,7 @@ public class MessageGenerator {
                 .append(Messages.YOUR_PASSWORD)
                 .append(password)
                 .append('\n')
-                .append(Messages.GOOD_LUCK);
+                .append(Messages.GOOD_LUCK_IN_NEW_JOB);
         return message.toString();
     }
 
@@ -36,6 +36,21 @@ public class MessageGenerator {
                 .append(Messages.REGRETS)
                 .append('\n')
                 .append(Messages.TRY_LATER);
+        return message.toString();
+    }
+
+    public String generateForgetPasswordMessage (String name, String login, String newPassword) {
+        StringBuilder message = new StringBuilder();
+        message.append(Messages.GREETING)
+                .append(name)
+                .append('\n')
+                .append(Messages.YOUR_LOGIN)
+                .append(login)
+                .append('\n')
+                .append(Messages.YOUR_NEW_PASSWORD)
+                .append(newPassword)
+                .append('\n')
+                .append(Messages.GOOD_LUCK);
         return message.toString();
     }
 

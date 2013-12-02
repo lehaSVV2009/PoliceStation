@@ -5,11 +5,14 @@ import com.kadet.java.policeStation.entity.*;
 import com.kadet.java.policeStation.model.MessageSender;
 import com.kadet.java.policeStation.util.Messages;
 import com.kadet.java.swing.pagination.Pagination;
+import com.kadet.java.swing.pagination.PaginationPanel;
 import com.kadet.java.swing.textfields.editableLabel.EditableLabel;
 import org.junit.Test;
 
 import javax.swing.*;
-import java.util.Date;
+import java.awt.*;
+import java.util.*;
+import java.util.List;
 
 /**
  * Unit com.kadet.java.policeStation for simple App.
@@ -26,6 +29,7 @@ public class AppTest {
 
     public static void main(String[] args) {
         AppTest appTest = new AppTest();
+//        appTest.testPaginationPanel();
         appTest.startMainWindow();
 //        appTest.testPagination();
 //        appTest.startMailSender();
@@ -64,7 +68,7 @@ public class AppTest {
                 new Policeman(
                         Status.BAD,
                         "Kuchin Alexey Eduardovich",
-                        "lehaSVV2009test@gmail.com",
+                        "lehaSVV2009@gmail.com",
                         new Date(),
                         true,
                         "qwe",
@@ -75,11 +79,88 @@ public class AppTest {
                 new Sheriff(
                         Status.GOOD,
                         "Zamanov Igor Valentinovich",
-                        "lehaSVV2009test@gmail.com",
+                        "lehaSVV2009@gmail.com",
                         new Date(),
                         true,
                         "",
                         ""
+                )
+        );
+        policemanDatabase.addPoliceman(
+                new Policeman(
+                        Status.YOUNG,
+                        "1qwe",
+                        "1qwe",
+                        new Date(),
+                        true,
+                        "login",
+                        "password"
+                )
+        );
+        policemanDatabase.addPoliceman(
+                new Policeman(
+                        Status.YOUNG,
+                        "2qwe",
+                        "2qwe",
+                        new Date(),
+                        true,
+                        "login",
+                        "password"
+                )
+        );
+        policemanDatabase.addPoliceman(
+                new Policeman(
+                        Status.YOUNG,
+                        "3qwe",
+                        "3qwe",
+                        new Date(),
+                        true,
+                        "login",
+                        "password"
+                )
+        );
+        policemanDatabase.addPoliceman(
+                new Policeman(
+                        Status.YOUNG,
+                        "4qwe",
+                        "4qwe",
+                        new Date(),
+                        true,
+                        "login",
+                        "password"
+                )
+        );
+        policemanDatabase.addPoliceman(
+                new Policeman(
+                        Status.YOUNG,
+                        "5qwe",
+                        "5qwe",
+                        new Date(),
+                        true,
+                        "login",
+                        "password"
+                )
+        );
+        policemanDatabase.addPoliceman(
+                new Policeman(
+                        Status.YOUNG,
+                        "6qwe",
+                        "6qwe",
+                        new Date(),
+                        true,
+                        "login",
+                        "password"
+                )
+        );
+        policemanDatabase.addPoliceman(
+                new Policeman(
+                        Status.YOUNG,
+                        "7qwe",
+                        "7qwe",
+                        new Date(),
+                        true,
+                        "login",
+                        "password"
                 )
         );
         resumeDatabase = ResumeDatabase.getInstance();
@@ -119,6 +200,127 @@ public class AppTest {
                 Messages.GETTING_THE_JOB_TOPIC
         );
     }
+
+    private void testPaginationPanel () {
+        final PolicemanDatabase policemanDatabase = PolicemanDatabase.getInstance();
+        fillPolicemanDatabase();
+        final JFrame frame = new JFrame();
+        frame.setMinimumSize(new Dimension(800, 800));
+        PaginationPanel panel = new PaginationPanel(frame, 4) {
+            @Override
+            public void clickPage(int currentPage, int itemsPerPage) {
+        /*        updateComponents(
+                        policemanDatabase.getPolicemen().size(),
+                        itemsPerPage,
+                        currentPage,
+                        EntitiesToViewConverter.getFirePolicemenPanelsFromPolicemen(
+                                policemanDatabase.subListWithoutSomebody((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage),
+                                frame
+                        )
+                );*/
+            }
+        };
+        frame.setContentPane(panel);
+        frame.setVisible(true);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void checkSubListFromEmptyList () {
+        PolicemanDatabase policemanDatabase = PolicemanDatabase.getInstance();
+        List<Policeman> policemen = policemanDatabase.subListWithoutSomebody(100, 102, new ArrayList<Policeman>());
+    }
+
+    private void fillPolicemanDatabase () {
+        PolicemanDatabase policemanDatabase = PolicemanDatabase.getInstance();
+        policemanDatabase.addPoliceman(
+                new Policeman(
+                        Status.YOUNG,
+                        "1qwe",
+                        "1qwe",
+                        new Date(),
+                        true,
+                        "login",
+                        "password"
+                )
+        );
+        policemanDatabase.addPoliceman(
+                new Policeman(
+                        Status.YOUNG,
+                        "2qwe",
+                        "2qwe",
+                        new Date(),
+                        true,
+                        "login",
+                        "password"
+                )
+        );
+        policemanDatabase.addPoliceman(
+                new Policeman(
+                        Status.YOUNG,
+                        "3qwe",
+                        "3qwe",
+                        new Date(),
+                        true,
+                        "login",
+                        "password"
+                )
+        );
+        policemanDatabase.addPoliceman(
+                new Policeman(
+                        Status.YOUNG,
+                        "4qwe",
+                        "4qwe",
+                        new Date(),
+                        true,
+                        "login",
+                        "password"
+                )
+        );
+        policemanDatabase.addPoliceman(
+                new Policeman(
+                        Status.YOUNG,
+                        "5qwe",
+                        "5qwe",
+                        new Date(),
+                        true,
+                        "login",
+                        "password"
+                )
+        );
+        policemanDatabase.addPoliceman(
+                new Policeman(
+                        Status.YOUNG,
+                        "6qwe",
+                        "6qwe",
+                        new Date(),
+                        true,
+                        "login",
+                        "password"
+                )
+        );
+        policemanDatabase.addPoliceman(
+                new Policeman(
+                        Status.YOUNG,
+                        "7qwe",
+                        "7qwe",
+                        new Date(),
+                        true,
+                        "login",
+                        "password"
+                )
+        );
+
+    }
+
+    @Test()
+    public void checkSubList () {
+        PolicemanDatabase policemanDatabase = PolicemanDatabase.getInstance();
+        fillPolicemanDatabase();
+        List<Policeman> policemen = policemanDatabase.subListWithoutSomebody(0, 1, new ArrayList<Policeman>());
+        assert policemen.size() == 1;
+//        System.out.println("size - " + policemen.size());
+    }
+
 
     @Test()
     public void start () {

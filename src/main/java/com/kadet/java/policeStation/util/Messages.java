@@ -9,12 +9,26 @@ package com.kadet.java.policeStation.util;
  */
 public final class Messages {
 
+    /**
+     * Main window strings
+     */
     public static final String LOG_IN_BUTTON = "Log in";
     public static final String LOGIN_LABEL = "Login";
     public static final String PASSWORD_LABEL = "Password";
 
     public static final String GET_JOB_BUTTON = "Get a job";
 
+    public static final String FORGET_PASSWORD_BUTTON = "Forget Password";
+    public static final String INPUT_YOUR_EMAIL = "Input your email";
+    public static final String BAD_INPUT_DATE = "Bad input data!";
+    public static final String LOGIN_AND_PASSWORD_ARE_SEND_SUCCESS = "Login and password are send to your email";
+    public static final String LOGIN_AND_PASSWORD_ARE_SEND_ERROR = "Message send ERROR!";
+    public static final String YOUR_NEW_PASSWORD = "Your new password : ";
+    public static final String NEW_PASSWORD_TOPIC = "New Password";
+    public static final String THERE_ARE_NO_SUCH_POLICEMAN = "There are no such policeman!";
+    /**
+     * For Date
+     */
     public static final String[] MONTHS = {
             "January",
             "February",
@@ -35,6 +49,9 @@ public final class Messages {
             "Female"
     };
 
+    /**
+     * Labels for registration
+     */
     public static final String FIO_LABEL = "Surname Name Patronymic";
     public static final String EMAIL_LABEL = "Email";
     public static final String BIRTHDAY_LABEL = "Birthday";
@@ -46,6 +63,9 @@ public final class Messages {
 
     public static final String LOGIN_AND_PASSWORD_ARE_NOT_CORRECT = "Login and password are not correct";
 
+    /**
+     * Policeman button labels
+     */
     public static final String ACCOUNT_SETTINGS_BUTTON = "Account settings";
     public static final String CRIMINALS_DATABASE_BUTTON = "Criminals database";
     public static final String CRIMINAL_CASES_DATABASE_BUTTON = "Criminal cases database";
@@ -53,6 +73,9 @@ public final class Messages {
     public static final String CREATE_CRIMINAL_CASE_BUTTON = "Create criminal case";
     public static final String ADD_CRIMINAL_BUTTON = "Add criminal";
 
+    /**
+     * Resign statuses
+     */
     public static final String RESIGN_SUCCESS = "Your resign was succeed";
     public static final String RESIGN_ERROR = "Your resign was not succeed";
 
@@ -84,8 +107,9 @@ public final class Messages {
      */
     public final static String CONGRATULATIONS_MESSAGE = "You got the job!";
     public final static String YOUR_LOGIN = "Your login : ";
-    public final static String YOUR_PASSWORD = "Your login : ";
-    public final static String GOOD_LUCK = "Good luck in your new job!";
+    public final static String YOUR_PASSWORD = "Your password : ";
+    public static final String GOOD_LUCK = "Good luck!";
+    public final static String GOOD_LUCK_IN_NEW_JOB = "Good luck in your new job!";
 
     /**
      * Messages to email about failed in getting job

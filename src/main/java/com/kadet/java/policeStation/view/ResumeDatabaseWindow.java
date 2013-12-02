@@ -16,6 +16,7 @@ import java.util.List;
  */
 public class ResumeDatabaseWindow extends AbstractWindow {
 
+
     private List<ResumePanel> resumePanels;
 
     private ResumeDatabase resumeDatabase = ResumeDatabase.getInstance();

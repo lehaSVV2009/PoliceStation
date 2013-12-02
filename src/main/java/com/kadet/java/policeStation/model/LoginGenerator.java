@@ -30,7 +30,7 @@ public final class LoginGenerator {
 
     public String generateLogin (String fio) {
         String login
-                = fio.replaceAll("(^ )|( $)", "");
+                = fio.replaceAll("\\s", "");
         for (Policeman policeman : policemanDatabase.getPolicemen()) {
             if(login.equals(policeman.getLogin())) {
                 login = generateLogin(login + DIGITS[random.nextInt(DIGITS.length)]);

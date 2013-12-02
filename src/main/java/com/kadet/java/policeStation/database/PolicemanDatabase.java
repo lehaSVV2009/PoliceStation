@@ -38,4 +38,34 @@ public class PolicemanDatabase {
     public boolean remove (Policeman policeman) {
         return policemen.remove(policeman);
     }
+
+    public int getPolicemenNumberWithoutSomebody (List<Policeman> without) {
+        return getListWithoutSomebody(without).size();
+    }
+
+    public List<Policeman> getListWithoutSomebody (List<Policeman> without) {
+        List<Policeman> subPolicemen = new ArrayList<Policeman>();
+        for (Policeman policeman : policemen) {
+            if (!without.contains(policeman)) {
+                subPolicemen.add(policeman);
+            }
+        }
+        return subPolicemen;
+    }
+
+    public List<Policeman> subListWithoutSomebody(int firstIndex, int lastIndex, List<Policeman> without) {
+        List<Policeman> policemenWithout
+                = getListWithoutSomebody(without);
+        if (firstIndex < 0 || lastIndex < 1 || firstIndex >= lastIndex || firstIndex > policemenWithout.size()) {
+            throw new RuntimeException("Bad parameters error!");
+        }
+        List<Policeman> subPolicemen
+                = new ArrayList<Policeman>();
+        for (int policemanIndex = firstIndex; policemanIndex < lastIndex && policemanIndex < policemenWithout.size(); ++policemanIndex) {
+            subPolicemen.add(
+                    policemenWithout.get(policemanIndex)
+            );
+        }
+        return subPolicemen;
+    }
 }

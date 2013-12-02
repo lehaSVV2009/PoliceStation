@@ -1,9 +1,11 @@
 package com.kadet.java.policeStation.view;
 
 import com.kadet.java.policeStation.database.PolicemanDatabase;
-import com.kadet.java.policeStation.database.ResumeDatabase;
 import com.kadet.java.policeStation.entity.Sheriff;
 import com.kadet.java.policeStation.entity.Policeman;
+import com.kadet.java.policeStation.model.LoginGenerator;
+import com.kadet.java.policeStation.model.MessageGenerator;
+import com.kadet.java.policeStation.model.MessageSender;
 import com.kadet.java.swing.textfields.HintTextField;
 import com.kadet.java.policeStation.util.Messages;
 
@@ -40,6 +42,12 @@ public class MainWindow extends JFrame implements ActionListener{
 
     private JButton getJobButton;
 
+    private JButton forgetPassword;
+
+    private LoginGenerator loginGenerator;
+    private MessageGenerator messageGenerator;
+    private MessageSender messageSender;
+
     public MainWindow() throws HeadlessException {
         initialize();
         initializeComponents();
@@ -54,8 +62,13 @@ public class MainWindow extends JFrame implements ActionListener{
 
     private void initializeComponents () {
         initializeLogInComponents();
+        initializeForgetPasswordComponents();
         initializeRegistrationComponents();
         initializeSubWindows();
+
+        this.loginGenerator = new LoginGenerator();
+        this.messageGenerator = new MessageGenerator();
+        this.messageSender = new MessageSender();
     }
 
     private void initializeLogInComponents () {
@@ -70,6 +83,11 @@ public class MainWindow extends JFrame implements ActionListener{
         getJobButton.addActionListener(this);
     }
 
+    private void initializeForgetPasswordComponents () {
+        forgetPassword = new JButton(Messages.FORGET_PASSWORD_BUTTON);
+        forgetPassword.addActionListener(this);
+    }
+
     private void initializeSubWindows () {
         this.addingResumeWindow = new AddingResumeWindow(this);
         this.policemanWindow = new PolicemanWindow(this);
@@ -79,6 +97,7 @@ public class MainWindow extends JFrame implements ActionListener{
     private void addComponents () {
         addLogInPanel();
         addGetJobPanel();
+        addForgetPasswordPanel();
     }
 
     /**
@@ -98,6 +117,11 @@ public class MainWindow extends JFrame implements ActionListener{
         add(getJobPanel, BorderLayout.WEST);
     }
 
+    private void addForgetPasswordPanel () {
+        JPanel forgetPasswordPanel = new JPanel();
+        forgetPasswordPanel.add(forgetPassword);
+        add(forgetPasswordPanel, BorderLayout.SOUTH);
+    }
 
     public void logIn(String login, String password) {
         Policeman enteredPoliceman = null;
@@ -121,6 +145,43 @@ public class MainWindow extends JFrame implements ActionListener{
         }
     }
 
+    public void forgetPassword (String email) {
+        List<Policeman> policemen
+                = policemanDatabase.getPolicemen();
+        for (Policeman policeman : policemen) {
+            if (email.equals(policeman.getEmail())) {
+                sendForgetPasswordMessage(policeman);
+                return;
+            }
+        }
+        showMessage(Messages.THERE_ARE_NO_SUCH_POLICEMAN);
+    }
+
+    private String generateForgetPasswordMessage (String name, String login, String newPassword)  {
+        return
+            messageGenerator.generateForgetPasswordMessage(
+                name,
+                login,
+                newPassword
+            );
+    }
+
+
+    private void sendForgetPasswordMessage (Policeman policeman) {
+        String newPassword = loginGenerator.generatePassword();
+        boolean status = messageSender.sendMessageToEmail(
+                generateForgetPasswordMessage(policeman.getFio(), policeman.getLogin(), newPassword),
+                policeman.getEmail(),
+                Messages.NEW_PASSWORD_TOPIC
+        );
+        if (status) {
+            policeman.setPassword(newPassword);
+            showMessage(Messages.LOGIN_AND_PASSWORD_ARE_SEND_SUCCESS);
+        } else {
+            showMessage(Messages.LOGIN_AND_PASSWORD_ARE_SEND_ERROR);
+        }
+    }
+
     public void getJob () {
         this.setVisible(false);
         addingResumeWindow.setVisible(true);
@@ -130,16 +191,33 @@ public class MainWindow extends JFrame implements ActionListener{
         JOptionPane.showMessageDialog(this, message);
     }
 
+    private void openInputEmailDialog () {
+        String email = JOptionPane.showInputDialog(this, Messages.INPUT_YOUR_EMAIL);
+        if (email == null || "".equals(email) || email.contains(" ")) {
+            showMessage(Messages.BAD_INPUT_DATE);
+            return;
+        }
+        forgetPassword(email);
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
+
         if (source == getJobButton) {
+
             getJob();
-        }
-        if (source == logInButton) {
+
+        } else if (source == logInButton) {
+
             String login = loginTextfield.getText();
             String password = passwordTextfield.getText();
             logIn(login, password);
+
+        } else if (source == forgetPassword) {
+
+            openInputEmailDialog();
+
         }
     }
 

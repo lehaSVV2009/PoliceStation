@@ -90,7 +90,6 @@ public class ResumePanel extends AbstractPanel implements ActionListener {
         Policeman policeman
                 = transformResumeToPoliceman(resume);
         policemanDatabase.addPoliceman(policeman);
-        System.out.println("password : " + policeman.getPassword());
         sendMessageToEmail(
                 messageGenerator.generateSuccessGettingJobMessage(
                         policeman.getFio(),
