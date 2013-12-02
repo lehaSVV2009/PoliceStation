@@ -1,5 +1,7 @@
 package com.kadet.java.policeStation.util;
 
+import com.kadet.java.policeStation.view.AbstractPanel;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -10,9 +12,7 @@ import java.awt.*;
  * Time: 20:17
  * To change this template use File | Settings | File Templates.
  */
-public class SexPanel extends JPanel {
-
-    private Window parent;
+public class SexPanel extends AbstractPanel {
 
     private String labelText;
     private JLabel sexLabel;
@@ -20,26 +20,29 @@ public class SexPanel extends JPanel {
     private JComboBox<String> sex;
 
     public SexPanel(Window parent, String labelText) {
+        super(parent);
         this.labelText = labelText;
-        this.parent = parent;
-        initialize();
-        initializeComponents();
-        addComponents();
+        updateComponents();
     }
 
-    private void initialize() {
+    protected void initialize() {
         setLayout(new FlowLayout());
     }
 
-    private void initializeComponents() {
-        sexLabel = new JLabel(Messages.SEX_LABEL);
+    protected void initializeComponents() {
+        sexLabel = new JLabel();
         sex = new JComboBox<String>(Messages.SEX);
     }
 
 
-    private void addComponents() {
+    protected void addComponents() {
         add(sexLabel);
         add(sex);
+    }
+
+    @Override
+    protected void updateComponents() {
+        sexLabel.setText(labelText);
     }
 
     public boolean getSex () {

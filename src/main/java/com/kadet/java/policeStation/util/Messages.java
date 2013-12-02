@@ -68,5 +68,42 @@ public final class Messages {
 
     public static final String SAVE_CHANGES = "Save changes";
 
+    public static final String RESUME_DATABASE_BUTTON = "Resume database";
+    public static final String POLICEMEN_DATABASE_BUTTON = "Policemen database";
+
+    public static final String ACCEPT_BUTTON = "Accept";
+    public static final String REJECT_BUTTON = "Reject";
+
+    /**
+     * Messages to email
+     */
+    public final static String GREETING = "Hello, ";
+    public static final String GETTING_THE_JOB_TOPIC = "Getting the job";
+    /**
+     * Messages to email about getting job
+     */
+    public final static String CONGRATULATIONS_MESSAGE = "You got the job!";
+    public final static String YOUR_LOGIN = "Your login : ";
+    public final static String YOUR_PASSWORD = "Your login : ";
+    public final static String GOOD_LUCK = "Good luck in your new job!";
+
+    /**
+     * Messages to email about failed in getting job
+     */
+    public static final String REGRETS = "Regrets, but you don't take the job!";
+    public static final String TRY_LATER = "Maybe, try later. Good luck!";
+
+    /**
+     * Message sending status
+     */
+    public static final String SEND_MESSAGE_SUCCESS = "Message was successfully sent!";
+    public static final String SEND_MESSAGE_ERROR = "Wrong email address!";
+
+    /**
+     * Fire policemen strings
+     */
+    public static final String FIRE_POLICEMAN_BUTTON = "Fire";
+    public static final String FIRE_POLICEMAN_SUCCESS = "Policeman is fired";
+    public static final String FIRE_POLICEMAN_FAILED = "Fire policeman ERROR!";
 
 }

@@ -28,8 +28,7 @@ public class MainWindow extends JFrame implements ActionListener{
 
     private final static int DEFAULT_TEXTFIELD_LENGTH = 20;
 
-    private ResumeDatabase resumeDatabase;
-    private PolicemanDatabase policemanDatabase;
+    private PolicemanDatabase policemanDatabase = PolicemanDatabase.getInstance();
 
     private PolicemanWindow policemanWindow;
     private SheriffWindow sheriffWindow;
@@ -41,9 +40,7 @@ public class MainWindow extends JFrame implements ActionListener{
 
     private JButton getJobButton;
 
-    public MainWindow(ResumeDatabase resumeDatabase, PolicemanDatabase policemanDatabase) throws HeadlessException {
-        this.resumeDatabase = resumeDatabase;
-        this.policemanDatabase = policemanDatabase;
+    public MainWindow() throws HeadlessException {
         initialize();
         initializeComponents();
         addComponents();
@@ -76,6 +73,7 @@ public class MainWindow extends JFrame implements ActionListener{
     private void initializeSubWindows () {
         this.addingResumeWindow = new AddingResumeWindow(this);
         this.policemanWindow = new PolicemanWindow(this);
+        this.sheriffWindow = new SheriffWindow(this);
     }
 
     private void addComponents () {
@@ -113,7 +111,9 @@ public class MainWindow extends JFrame implements ActionListener{
         if (enteredPoliceman == null) {
             showMessage(Messages.LOGIN_AND_PASSWORD_ARE_NOT_CORRECT);
         } else if (enteredPoliceman instanceof Sheriff){
-            System.out.println("This is sheriff");
+            setVisible(false);
+            sheriffWindow.setPoliceman(enteredPoliceman);
+            sheriffWindow.setVisible(true);
         } else {
             setVisible(false);
             policemanWindow.setPoliceman(enteredPoliceman);

@@ -1,4 +1,4 @@
-package com.kadet.java.policeStation.util;
+package com.kadet.java.policeStation.view;
 
 import com.kadet.java.policeStation.entity.CriminalStatus;
 
@@ -11,9 +11,7 @@ import java.awt.*;
  *
  * @author Кадет
  */
-public class CriminalStatusPanel extends JPanel {
-
-    private Window parent;
+public class CriminalStatusPanel extends AbstractPanel {
 
     private String labelText;
     private JLabel criminalStatusLabel;
@@ -21,18 +19,11 @@ public class CriminalStatusPanel extends JPanel {
     private JComboBox<String> criminalStatusComboBox;
 
     public CriminalStatusPanel(Window parent, String labelText) {
+        super(parent);
         this.labelText = labelText;
-        this.parent = parent;
-        initialize();
-        initializeComponents();
-        addComponents();
     }
 
-    private void initialize() {
-        setLayout(new FlowLayout());
-    }
-
-    private void initializeComponents() {
+    protected void initializeComponents() {
 
         criminalStatusLabel = new JLabel(labelText);
 
@@ -42,10 +33,14 @@ public class CriminalStatusPanel extends JPanel {
         }
     }
 
-
-    private void addComponents() {
+    protected void addComponents() {
         add(criminalStatusLabel);
         add(criminalStatusComboBox);
+    }
+
+    @Override
+    protected void updateComponents() {
+
     }
 
     public CriminalStatus getCriminalStatus () {

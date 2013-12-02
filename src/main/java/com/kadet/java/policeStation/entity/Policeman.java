@@ -13,14 +13,16 @@ public class Policeman {
 
     protected Status status;
     private String fio;
+    private String email;
     private Date birthday;
     private boolean sex;
     private String login;
     private String password;
 
-    public Policeman(Status status, String fio, Date birthday, boolean sex, String login, String password) {
+    public Policeman(Status status, String fio, String email, Date birthday, boolean sex, String login, String password) {
         this.status = status;
         this.fio = fio;
+        this.email = email;
         this.birthday = birthday;
         this.sex = sex;
         this.login = login;
@@ -35,12 +37,16 @@ public class Policeman {
         return fio;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
     public Date getBirthday() {
         return birthday;
     }
 
     public boolean isMale() {
-        return sex == true;
+        return sex;
     }
 
     public String getLogin() {
@@ -51,12 +57,12 @@ public class Policeman {
         return password;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
     public void setFio(String fio) {
         this.fio = fio;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public void setBirthday(Date birthday) {
@@ -67,11 +73,8 @@ public class Policeman {
         this.sex = sex;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
     public void setPassword(String password) {
         this.password = password;
     }
 }
+

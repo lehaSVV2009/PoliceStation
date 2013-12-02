@@ -2,7 +2,6 @@ package com.kadet.java.policeStation.view;
 
 import com.kadet.java.policeStation.database.CriminalCaseDatabase;
 import com.kadet.java.policeStation.database.PolicemanDatabase;
-import com.kadet.java.policeStation.entity.Criminal;
 import com.kadet.java.policeStation.entity.CriminalCase;
 import com.kadet.java.policeStation.entity.Policeman;
 import com.kadet.java.policeStation.util.DataStrings;
@@ -16,6 +15,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.*;
 import java.util.List;
 
@@ -29,7 +30,7 @@ import java.util.List;
 public class PolicemanWindow extends AbstractWindow implements ActionListener{
 
 
-    private Policeman policeman;
+    protected Policeman policeman;
 
     /**
      * Окно просмотра данных полицейского
@@ -56,6 +57,8 @@ public class PolicemanWindow extends AbstractWindow implements ActionListener{
      */
     private AddingCriminalWindow addingCriminalWindow;
 
+    private boolean isNotExit = false;
+
     private JButton accountSettingsButton;
     private JButton criminalsDatabaseButton;
     private JButton criminalCasesDatabaseButton;
@@ -74,7 +77,7 @@ public class PolicemanWindow extends AbstractWindow implements ActionListener{
         super(window);
     }
 
-    public void initializeComponents () {
+    protected void initializeComponents () {
 
         this.accountSettingsButton
                 = new JButton(Messages.ACCOUNT_SETTINGS_BUTTON);
@@ -102,13 +105,6 @@ public class PolicemanWindow extends AbstractWindow implements ActionListener{
 
         this.criminalCasesPanel = new JPanel();
         this.criminalCasesTextAreas = new ArrayList<JTextArea>();
-        /*List<CriminalCase> lastCriminalCases
-                = criminalCaseDatabase.getLastCriminalCases(DataStrings.MAX_CRIMINAL_CASES_VALUE);
-        for (CriminalCase criminalCase : lastCriminalCases) {
-            JTextArea textArea = new JTextArea(criminalCase.toString());
-            criminalCasesTextAreas.add(textArea);
-        }*/
-
 
 
         this.accountSettingsInfo = new AccountSettingsWindow(this);
@@ -122,7 +118,7 @@ public class PolicemanWindow extends AbstractWindow implements ActionListener{
         this.addingCriminalCaseWindow = new AddingCriminalCaseWindow(this);
     }
 
-    private void removeComponents () {
+    protected void removeComponents () {
         remove(accountSettingsButton);
         remove(criminalsDatabaseButton);
         remove(criminalCasesDatabaseButton);
@@ -133,13 +129,13 @@ public class PolicemanWindow extends AbstractWindow implements ActionListener{
         clearCriminalCasesTextAreas();
     }
 
-    private void clearCriminalCasesTextAreas () {
+    protected void clearCriminalCasesTextAreas () {
         while (criminalCasesTextAreas.size() != 0) {
             criminalCasesTextAreas.remove(0);
         }
     }
 
-    public void addComponents () {
+    protected void addComponents () {
 
         add(accountSettingsButton);
         add(criminalsDatabaseButton);
@@ -171,36 +167,39 @@ public class PolicemanWindow extends AbstractWindow implements ActionListener{
     }
 
     public void openAccountSettingsWindow () {
+        isNotExit = true;
+        setVisible(false);
         accountSettingsInfo.setPoliceman(policeman);
         accountSettingsInfo.setVisible(true);
     }
 
     public void openAddingCriminalWindow () {
+        isNotExit = true;
+        setVisible(false);
         addingCriminalWindow.setVisible(true);
     }
 
-    public void addCriminal (Criminal criminal) {
-
-    }
-
-    public void addCriminalCase (CriminalCase criminalCase) {
-
-    }
-
     public void openCriminalsDatabaseWindow () {
+        isNotExit = true;
+        setVisible(false);
         criminalsWindow.setVisible(true);
     }
 
     public void openCriminalCaseDatabaseWindow () {
+        isNotExit = true;
+        setVisible(false);
         criminalCasesWindow.setVisible(true);
     }
 
     public void openAddCriminalCaseWindow () {
+        isNotExit = true;
+        setVisible(false);
         addingCriminalCaseWindow.setVisible(true);
     }
 
     public void resign () {
         boolean result = policemanDatabase.remove(policeman);
+        isNotExit = false;
         if (result) {
             JOptionPane.showMessageDialog(this, Messages.RESIGN_SUCCESS);
             setVisible(false);
@@ -216,8 +215,10 @@ public class PolicemanWindow extends AbstractWindow implements ActionListener{
             updateComponents();
         }
         super.setVisible(b);
-        if (b == false) {
+        if (b == false && !isNotExit) {
             getParent().setVisible(true);
+        } else {
+            isNotExit = false;
         }
     }
 

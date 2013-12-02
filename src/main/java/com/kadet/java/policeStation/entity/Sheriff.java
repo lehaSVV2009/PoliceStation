@@ -11,8 +11,8 @@ import java.util.Date;
  */
 public class Sheriff extends Policeman {
 
-    public Sheriff(Status status, String fio, Date birthday, boolean sex, String login, String password) {
-        super(status, fio, birthday, sex, login, password);
+    public Sheriff(Status status, String fio, String email, Date birthday, boolean sex, String login, String password) {
+        super(status, fio, email, birthday, sex, login, password);
     }
 
     public void setStatus (Status status) {

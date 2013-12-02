@@ -17,12 +17,12 @@ public abstract class AbstractWindow extends JDialog {
 
     public AbstractWindow(Window parent) {
         super(parent);
-        initalize();
+        initialize();
         initializeComponents();
         addComponents();
     }
 
-    protected void initalize () {
+    protected void initialize() {
         setLayout(new FlowLayout());
         setMinimumSize(new Dimension(WIDTH, HEIGHT));
     }

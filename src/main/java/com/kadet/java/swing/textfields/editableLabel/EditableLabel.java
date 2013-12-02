@@ -1,4 +1,4 @@
-package com.kadet.java.swing.textfields;
+package com.kadet.java.swing.textfields.editableLabel;
 
 import com.kadet.java.policeStation.util.Messages;
 
@@ -34,10 +34,8 @@ public abstract class EditableLabel extends JPanel implements MouseListener, Act
 
     private JButton saveChangesButton;
 
-    public EditableLabel(Window owner, String text, Object editableObject) {
-        this.editableObject = editableObject;
+    public EditableLabel(Window owner) {
         this.owner = owner;
-        this.labelText = text;
         initialize();
         initializeComponents();
         addStartComponents();
@@ -72,6 +70,10 @@ public abstract class EditableLabel extends JPanel implements MouseListener, Act
 
     public void updateComponents () {
         state.updateComponents();
+    }
+
+    public void executeChanges () {
+        state.executeChanges();
     }
 
     public void removeTextFieldComponents () {
@@ -112,7 +114,7 @@ public abstract class EditableLabel extends JPanel implements MouseListener, Act
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getClickCount() == 2) {
-            updateComponents();
+            executeChanges();
         }
     }
 
@@ -144,7 +146,7 @@ public abstract class EditableLabel extends JPanel implements MouseListener, Act
                 editableObject,
                 textField.getText()
         );
-        updateComponents();
+        executeChanges();
     }
 
     public void setState(State state) {
@@ -157,5 +159,14 @@ public abstract class EditableLabel extends JPanel implements MouseListener, Act
 
     public State getTextFieldState() {
         return textFieldState;
+    }
+
+    public void setText(String labelText) {
+        this.labelText = labelText;
+        updateComponents();
+    }
+
+    public void setEditableObject (Object object) {
+        this.editableObject = object;
     }
 }

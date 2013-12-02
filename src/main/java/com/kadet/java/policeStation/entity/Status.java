@@ -11,6 +11,7 @@ public enum Status {
 
     BAD,
     GOOD,
-    UGLY
+    UGLY,
+    YOUNG
 
 }

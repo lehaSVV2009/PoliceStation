@@ -50,6 +50,10 @@ public class CriminalCase implements Comparable<CriminalCase>{
         this.description = description;
     }
 
+    public void setLastChange(Date lastChange) {
+        this.lastChange = lastChange;
+    }
+
     public Date getLastChange() {
         return lastChange;
     }

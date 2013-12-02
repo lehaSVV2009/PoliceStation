@@ -29,4 +29,12 @@ public class ResumeDatabase {
     public void addResume (Resume resume) {
         resumes.add(resume);
     }
+
+    public List<Resume> getResumes() {
+        return resumes;
+    }
+
+    public boolean removeResume (Resume resume) {
+        return resumes.remove(resume);
+    }
 }

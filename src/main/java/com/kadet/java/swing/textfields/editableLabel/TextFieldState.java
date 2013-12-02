@@ -1,4 +1,4 @@
-package com.kadet.java.swing.textfields;
+package com.kadet.java.swing.textfields.editableLabel;
 
 /**
  * Date: 01.12.13
@@ -15,7 +15,7 @@ public class TextFieldState implements State {
     }
 
     @Override
-    public void updateComponents() {
+    public void executeChanges() {
         removeComponents();
         editableLabel.setState(
                 editableLabel.getLabelState()
@@ -34,5 +34,11 @@ public class TextFieldState implements State {
     @Override
     public void addComponents() {
         editableLabel.addLabel();
+    }
+
+    @Override
+    public void updateComponents() {
+        editableLabel.updateTextFieldComponents();
+        editableLabel.updateOwner();
     }
 }

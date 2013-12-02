@@ -16,4 +16,7 @@ public final class DataStrings {
     public static final int LAST_DAY = 31;
 
     public static final int MAX_CRIMINAL_CASES_VALUE = 10;
+
+    public static final String HOME_EMAIL = "lehaSVV2009@gmail.com";
+    public static final String HOME_PASSWORD = "MSVVBateHeroes5";
 }

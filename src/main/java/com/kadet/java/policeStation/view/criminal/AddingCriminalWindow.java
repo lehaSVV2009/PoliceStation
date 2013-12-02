@@ -2,7 +2,7 @@ package com.kadet.java.policeStation.view.criminal;
 
 import com.kadet.java.policeStation.database.CriminalDatabase;
 import com.kadet.java.policeStation.entity.Criminal;
-import com.kadet.java.policeStation.util.CriminalStatusPanel;
+import com.kadet.java.policeStation.view.CriminalStatusPanel;
 import com.kadet.java.swing.textfields.HintTextField;
 import com.kadet.java.policeStation.util.Messages;
 import com.kadet.java.policeStation.util.SexPanel;

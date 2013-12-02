@@ -1,4 +1,4 @@
-package com.kadet.java.swing.textfields;
+package com.kadet.java.swing.textfields.editableLabel;
 
 /**
  * Date: 01.12.13
@@ -8,8 +8,9 @@ package com.kadet.java.swing.textfields;
  */
 public interface State {
 
-    public void updateComponents ();
+    public void executeChanges();
     public void removeComponents ();
     public void addComponents ();
+    public void updateComponents ();
 
 }

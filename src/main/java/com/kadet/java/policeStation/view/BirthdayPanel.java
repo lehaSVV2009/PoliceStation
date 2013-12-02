@@ -1,4 +1,7 @@
-package com.kadet.java.policeStation.util;
+package com.kadet.java.policeStation.view;
+
+import com.kadet.java.policeStation.util.DataStrings;
+import com.kadet.java.policeStation.util.Messages;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,9 +15,7 @@ import java.util.GregorianCalendar;
  * Time: 20:04
  * To change this template use File | Settings | File Templates.
  */
-public class BirthdayPanel extends JPanel {
-
-    private Window parent;
+public class BirthdayPanel extends AbstractPanel {
 
     private String labelText;
     private JLabel birthdayLabel;
@@ -24,18 +25,11 @@ public class BirthdayPanel extends JPanel {
     private JComboBox<String> yearOfBirth;
 
     public BirthdayPanel(Window parent, String labelText) {
+        super(parent);
         this.labelText = labelText;
-        this.parent = parent;
-        initialize();
-        initializeComponents();
-        addComponents();
     }
 
-    private void initialize() {
-        setLayout(new FlowLayout());
-    }
-
-    private void initializeComponents() {
+    protected void initializeComponents() {
 
         birthdayLabel = new JLabel(labelText);
 
@@ -53,11 +47,16 @@ public class BirthdayPanel extends JPanel {
     }
 
 
-    private void addComponents() {
+    protected void addComponents() {
         add(birthdayLabel);
         add(dayOfBirth);
         add(monthOfBirth);
         add(yearOfBirth);
+    }
+
+    @Override
+    protected void updateComponents() {
+        //To change body of implemented methods use File | Settings | File Templates.
     }
 
     public Date getBirthday () {

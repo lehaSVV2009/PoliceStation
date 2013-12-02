@@ -1,6 +1,7 @@
 package com.kadet.java.policeStation.view.criminal;
 
 import com.kadet.java.policeStation.entity.Criminal;
+import com.kadet.java.swing.textfields.editableLabel.EditableLabel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,6 +19,7 @@ public class CriminalWindow extends JDialog {
     private final static int HEIGHT = 800;
 
     private Criminal criminal;
+    private EditableLabel fioLabel;
     private JLabel criminalInfo;
 
     public CriminalWindow(Window parent, Criminal criminal) {
@@ -34,14 +36,28 @@ public class CriminalWindow extends JDialog {
     }
 
     private void initializeComponents () {
+        fioLabel = new EditableLabel(this) {
+            @Override
+            protected void editObject(Object editableObject, String editedText) {
+                Criminal criminal = (Criminal)editableObject;
+                criminal.setFio(editedText);
+            }
+        };
+
         criminalInfo = new JLabel();
     }
 
     private void addComponents () {
+        add(fioLabel);
+
         add(criminalInfo);
     }
 
     public void updateComponents () {
+
+        fioLabel.setText(criminal.getFio());
+        fioLabel.setEditableObject(criminal);
+
         criminalInfo.setText(criminal.toString());
     }
 

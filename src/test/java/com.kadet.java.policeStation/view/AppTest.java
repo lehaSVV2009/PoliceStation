@@ -2,8 +2,10 @@ package com.kadet.java.policeStation.view;
 
 import com.kadet.java.policeStation.database.*;
 import com.kadet.java.policeStation.entity.*;
+import com.kadet.java.policeStation.model.MessageSender;
+import com.kadet.java.policeStation.util.Messages;
 import com.kadet.java.swing.pagination.Pagination;
-import com.kadet.java.swing.textfields.EditableLabel;
+import com.kadet.java.swing.textfields.editableLabel.EditableLabel;
 import org.junit.Test;
 
 import javax.swing.*;
@@ -24,25 +26,35 @@ public class AppTest {
 
     public static void main(String[] args) {
         AppTest appTest = new AppTest();
-        appTest.startFrameWithEditableLabel();
-//        appTest.startMainWindow();
+        appTest.startMainWindow();
 //        appTest.testPagination();
+//        appTest.startMailSender();
+//        appTest.startFrameWithEditableLabel();
     }
 
     private void startMainWindow () {
 
+        resumeDatabase = ResumeDatabase.getInstance();
+        resumeDatabase.addResume(
+                new Resume(
+                        "Alexey Soroka",
+                        "lehaSVV2009test@gmail.com",
+                        new Date(),
+                        true
+                )
+        );
         criminalDatabase = CriminalDatabase.getInstance();
-        Criminal kadet = new Criminal(
-                "Kadet",
+        Criminal criminal = new Criminal(
+                "Zakranov Viktor Rodionovich",
                 new Date(),
                 true,
-                CriminalStatus.FREED
+                CriminalStatus.WANTED
         );
-        criminalDatabase.addCriminal(kadet);
+        criminalDatabase.addCriminal(criminal);
         criminalCaseDatabase = CriminalCaseDatabase.getInstance();
         criminalCaseDatabase.addCriminalCase(
                 new CriminalCase(
-                        kadet,
+                        criminal,
                         "description",
                         new Date()
                 )
@@ -51,18 +63,27 @@ public class AppTest {
         policemanDatabase.addPoliceman(
                 new Policeman(
                         Status.BAD,
-                        "F I O",
+                        "Kuchin Alexey Eduardovich",
+                        "lehaSVV2009test@gmail.com",
                         new Date(),
                         true,
                         "qwe",
                         "qwe"
                 )
         );
-        resumeDatabase = ResumeDatabase.getInstance();
-        mainWindow = new MainWindow(
-                resumeDatabase,
-                policemanDatabase
+        policemanDatabase.addPoliceman(
+                new Sheriff(
+                        Status.GOOD,
+                        "Zamanov Igor Valentinovich",
+                        "lehaSVV2009test@gmail.com",
+                        new Date(),
+                        true,
+                        "",
+                        ""
+                )
         );
+        resumeDatabase = ResumeDatabase.getInstance();
+        mainWindow = new MainWindow();
         mainWindow.setVisible(true);
     }
 
@@ -74,15 +95,29 @@ public class AppTest {
                 true,
                 CriminalStatus.FREED
         );
-        frame.setContentPane(new EditableLabel(frame, "text", kadet) {
+
+        EditableLabel editableLabel = new EditableLabel(frame) {
             @Override
             protected void editObject(Object editableObject, String editedText) {
                 ((Criminal)editableObject).setFio(editedText);
                 System.out.println(((Criminal) editableObject).getFio());
             }
-        });
+        };
+        editableLabel.setEditableObject(kadet);
+        editableLabel.setText(kadet.getFio());
+
+        frame.setContentPane(editableLabel);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    public void startMailSender () {
+        MessageSender messageSender = new MessageSender();
+        messageSender.sendMessageToEmail(
+                "message",
+                "lehaSVV2009test@gmail.com",
+                Messages.GETTING_THE_JOB_TOPIC
+        );
     }
 
     @Test()

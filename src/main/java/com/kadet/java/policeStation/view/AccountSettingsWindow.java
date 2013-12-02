@@ -2,6 +2,7 @@ package com.kadet.java.policeStation.view;
 
 import com.kadet.java.policeStation.entity.Policeman;
 import com.kadet.java.policeStation.util.Messages;
+import com.kadet.java.swing.textfields.editableLabel.EditableLabel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,12 +21,13 @@ public class AccountSettingsWindow extends JDialog {
 
     private Policeman policeman;
 
-    private JLabel fioLabel;
+    private EditableLabel fioLabel;
+    private EditableLabel emailLabel;
     private JLabel birthdayLabel;
     private JLabel statusLabel;
     private JLabel sexLabel;
     private JLabel loginLabel;
-    private JLabel passwordLabel;
+    private EditableLabel passwordLabel;
 
     public AccountSettingsWindow(JDialog parent) {
         super(parent);
@@ -40,16 +42,33 @@ public class AccountSettingsWindow extends JDialog {
     }
 
     private void initializeComponents () {
-        fioLabel = new JLabel();
+        fioLabel = new EditableLabel(this) {
+            @Override
+            protected void editObject(Object editableObject, String editedText) {
+                ((Policeman)editableObject).setFio(editedText);
+            }
+        };
+        emailLabel = new EditableLabel(this) {
+            @Override
+            protected void editObject(Object editableObject, String editedText) {
+                ((Policeman)editableObject).setEmail(editedText);
+            }
+        };
         birthdayLabel = new JLabel();
         statusLabel = new JLabel();
         sexLabel = new JLabel();
         loginLabel = new JLabel();
-        passwordLabel = new JLabel();
+        passwordLabel = new EditableLabel(this) {
+            @Override
+            protected void editObject(Object editableObject, String editedText) {
+                ((Policeman)editableObject).setPassword(editedText);
+            }
+        };
     }
 
     private void addComponents () {
         add(fioLabel);
+        add(emailLabel);
         add(birthdayLabel);
         add(statusLabel);
         add(sexLabel);
@@ -59,11 +78,21 @@ public class AccountSettingsWindow extends JDialog {
 
     private void updateComponents () {
         if (policeman != null) {
+            fioLabel.setEditableObject(policeman);
             fioLabel.setText(policeman.getFio());
+
+            emailLabel.setEditableObject(policeman);
+            emailLabel.setText(policeman.getEmail());
+
             birthdayLabel.setText(policeman.getBirthday().toString());
+
             statusLabel.setText(policeman.getStatus().toString());
+
             sexLabel.setText(policeman.isMale() ? Messages.SEX[0] : Messages.SEX[1]);
+
             loginLabel.setText(policeman.getLogin());
+
+            passwordLabel.setEditableObject(policeman);
             passwordLabel.setText(policeman.getPassword());
         }
     }
